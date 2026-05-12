@@ -1,0 +1,2 @@
+Assessment ID,Event Timestamp (UTC),Employee Email,Business Unit,Application,Application Category,Approval State,Source Type,Source System,Active Users,Contract Status,Security Docs,DPA Available,Deletion Rights,Residency Options,AI Training Policy,Breach Profile,Regulatory Context,Notes
+grc-001,2026-05-01T10:00:00Z,owner@company.com,IT,Approved Vendor,SaaS,Approved,Vendor GRC,GRC Export,50,Active,Received,Yes,Yes,EU available,No customer-data training,Reviewed,HIPAA SOC2,Example approved vendor inventory or GRC export row

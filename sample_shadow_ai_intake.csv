@@ -1,0 +1,5 @@
+event_id,timestamp_utc,user_email,department,tool_name,tool_approved,device_managed,event_type,data_classification,contains_pii,contains_source_code,contains_financial,contains_credentials,channel,records_count,country,notes
+evt-1001,2026-02-24T09:15:00Z,finance.user@example.com,Finance,ChatGPT,no,no,paste_credentials,restricted,yes,no,yes,yes,personal_browser,22,US,Sample row: prompt included database credential and account mapping.
+evt-1002,2026-02-24T10:03:00Z,engineering.user@example.com,Engineering,Perplexity,no,yes,file_upload,confidential,no,yes,no,no,file_share_link,180,US,Sample row: architecture document uploaded to external AI workspace.
+evt-1003,2026-02-24T10:55:00Z,operations.user@example.com,Operations,Browser Extension AI,no,no,browser_extension_install,internal,no,no,no,no,personal_browser,0,US,Sample row: unapproved extension installed in unmanaged browser profile.
+evt-1004,2026-02-24T11:20:00Z,marketing.user@example.com,Marketing,Gemini,yes,yes,prompt_submission,confidential,yes,no,no,no,api,640,US,Sample row: customer list included in prompt.

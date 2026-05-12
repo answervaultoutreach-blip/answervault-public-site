@@ -1,0 +1,2 @@
+Assessment ID,Event Timestamp (UTC),Employee Email,Business Unit,Application,Application Category,Approval State,Source Type,Source System,Active Users,Activity Type,Exfiltration Channel,Data Sensitivity,Contains PII,Contains Source Code,Contains Financial Data,Contains Credentials,Records Impacted,Notes
+casb-001,2026-05-01T10:00:00Z,user@company.com,Operations,Example Cloud App,SaaS,Unapproved,CASB Proxy,Firewall Proxy,18,File upload,Proxy,Confidential,Yes,No,No,No,300,Example CASB/firewall/proxy evidence row

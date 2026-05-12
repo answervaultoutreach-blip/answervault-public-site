@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AnswerVault | Shadow IT / Shadow AI Governance Workflow</title>
+    <link rel="stylesheet" href="/styles-brand-system.css" />
+    <style>
+      .wrap {
+        width: min(1280px, 94vw);
+        margin: 0 auto;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 28px 0 0;
+      }
+
+      .brand-block {
+        display: grid;
+        gap: 4px;
+      }
+
+      .brand-name {
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        font-weight: 800;
+        font-size: clamp(30px, 3.2vw, 58px);
+        line-height: 0.95;
+      }
+
+      .brand-sub {
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding-top: 8px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        border-bottom: 1px solid transparent;
+        font-size: 13px;
+        transition:
+          color var(--ease-fast),
+          border-color var(--ease-fast),
+          transform var(--ease-fast),
+          opacity var(--ease-fast);
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+        border-bottom-color: var(--accent);
+      }
+
+      .nav-links a:active {
+        transform: translateY(1px);
+        opacity: 0.85;
+      }
+
+      .nav-links a:focus-visible,
+      .theme-toggle:focus-visible,
+      .btn-main:focus-visible,
+      .btn-ghost:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .theme-toggle {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        padding: 6px 9px;
+        font: inherit;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          transform var(--ease-fast),
+          opacity var(--ease-fast),
+          border-color var(--ease-fast),
+          color var(--ease-fast),
+          background var(--ease-fast);
+      }
+
+      .theme-toggle:hover {
+        border-color: var(--accent);
+      }
+
+      .theme-toggle:active {
+        transform: translateY(1px);
+        opacity: 0.85;
+      }
+
+      body[data-theme="light"] {
+        --bg: #f3f5ec;
+        --surface: #fcfdf7;
+        --surface-soft: #f3f5ec;
+        --text: #11130f;
+        --muted: #4e5346;
+        --line: #d8ddc8;
+        --accent: #6f7f1a;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body[data-theme="light"] .btn-main {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #f8f8f2;
+      }
+
+      body[data-theme="light"] .btn-main:hover {
+        background: transparent;
+        color: var(--accent);
+      }
+
+      .hero {
+        padding: 48px 0 58px;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 44px;
+      }
+
+      .kicker {
+        margin: 0 0 12px;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(60px, 8.8vw, 144px);
+        line-height: 0.86;
+        letter-spacing: -0.045em;
+        max-width: 10.5ch;
+      }
+
+      .hero-copy {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.48;
+        max-width: 64ch;
+      }
+
+      .cta-row {
+        margin-top: 26px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn-main,
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 10px 14px 9px;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition:
+          transform var(--ease-fast),
+          opacity var(--ease-fast),
+          color var(--ease-fast),
+          background var(--ease-fast),
+          border-color var(--ease-fast);
+      }
+
+      .btn-main {
+        background: var(--accent);
+        color: var(--surface-soft);
+        border: 1px solid var(--accent);
+      }
+
+      .btn-main:hover {
+        background: transparent;
+        color: var(--accent);
+      }
+
+      .btn-main:active,
+      .btn-ghost:active {
+        transform: translateY(1px);
+        opacity: 0.9;
+      }
+
+      .btn-ghost {
+        border: 1px solid var(--line);
+        color: var(--text);
+      }
+
+      .btn-ghost:hover {
+        border-color: var(--accent);
+      }
+
+      .hero-rail {
+        border-left: 1px solid var(--line);
+        padding-left: 20px;
+        display: grid;
+        align-content: end;
+        gap: 18px;
+      }
+
+      .metric {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 10px;
+        align-items: baseline;
+      }
+
+      .metric-value {
+        font-size: clamp(32px, 4vw, 54px);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+      }
+
+      .metric-label {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .rule {
+        height: 1px;
+        background: var(--line);
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 34px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: clamp(32px, 4.6vw, 72px);
+        line-height: 0.9;
+        letter-spacing: -0.03em;
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .problem-points,
+      .scope-rows,
+      .proof-lines {
+        margin-top: 24px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .problem-item,
+      .scope-row,
+      .proof-line {
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .method-grid {
+        margin-top: 24px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .method-step {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 16px;
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .method-step b {
+        font-size: 13px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .method-step h3 {
+        margin: 0 0 6px;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .method-step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .split-grid {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
+      }
+
+      .split-col h3 {
+        margin: 0 0 12px;
+        font-size: 28px;
+        line-height: 0.95;
+      }
+
+      .split-col p,
+      .split-col li {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .split-col ul {
+        margin: 0;
+        padding-left: 16px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .deliverables {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 20px;
+      }
+
+      .deliverables-item {
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+      }
+
+      .deliverables-item strong {
+        font-family: var(--mono);
+        font-size: 13px;
+      }
+
+      .deliverables-item p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .plans {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .plan {
+        border: 1px solid var(--line);
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .plan h3 {
+        margin: 0;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+        line-height: 0.95;
+      }
+
+      .plan p,
+      .plan li {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .plan ul {
+        margin: 0;
+        padding-left: 16px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .contact {
+        display: grid;
+        gap: 16px;
+      }
+
+      .contact p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.5;
+        max-width: 70ch;
+      }
+
+      .signature {
+        border-top: 1px solid var(--line);
+        padding: 30px 0 46px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 11px;
+      }
+
+      @media (max-width: 1080px) {
+        .hero,
+        .section-head {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .hero-rail {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          padding-left: 0;
+          padding-top: 16px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .site-nav {
+          flex-direction: column;
+        }
+
+        .nav-links {
+          gap: 12px;
+        }
+
+        .deliverables,
+        .plans,
+        .split-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="site-nav">
+        <div class="brand-block">
+          <p class="brand-name">ANSWERVAULT</p>
+          <p class="brand-sub">Shadow IT / Shadow AI governance workflow</p>
+        </div>
+        <div class="nav-links">
+          <a href="#problem">Problem</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#governance">Governance</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#proof">Proof</a>
+          <a href="#contact">Contact</a>
+          <button id="themeToggle" class="theme-toggle" type="button">Light mode</button>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div>
+          <p class="kicker">For vCISO, GRC, procurement, and AI governance consulting teams</p>
+          <h1>Run Shadow IT / Shadow AI governance with real weekly evidence.</h1>
+          <p class="hero-copy">
+            AnswerVault helps consulting teams turn workspace, identity, finance, browser, CASB/proxy, and GRC exports into a unified app inventory,
+            risk routing, vendor posture, spend context, decision register, owner action plan, and leadership-ready weekly reporting.
+          </p>
+          <div class="cta-row">
+            <a class="btn-main" href="mailto:answervault.outreach@gmail.com?subject=AnswerVault%20Pilot%20Request">Request pilot intake</a>
+            <a class="btn-ghost" href="/sample_shadow_ai_intake.csv" download>Download intake template</a>
+            <a class="btn-ghost" href="/sample_executive_summary.md" download>Download sample summary</a>
+          </div>
+        </div>
+        <aside class="hero-rail">
+          <div class="metric">
+            <div class="metric-value">72h</div>
+            <div class="metric-label">Default first response window from intake to initial governance output.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">3</div>
+            <div class="metric-label">Evidence lanes today: workspace OAuth, IdP/SSO, finance spend, browser/endpoint, CASB/proxy, and vendor/GRC exports.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">7</div>
+            <div class="metric-label">Core delivery outputs across inventory, posture, decisions, actions, and leadership reporting.</div>
+          </div>
+        </aside>
+      </header>
+
+      <div class="rule"></div>
+
+      <section id="problem">
+        <p class="kicker">Problem</p>
+        <div class="section-head">
+          <h2 class="section-title">Most teams can describe Shadow IT and Shadow AI risk, but cannot govern it as an operating system.</h2>
+          <p class="lead">
+            The hard part is not recognizing that unapproved SaaS and AI use is happening. The hard part is proving what apps are in play, which are approved,
+            what data is flowing into them, what the vendor posture looks like, and who owns the next decision.
+          </p>
+        </div>
+        <div class="problem-points">
+          <div class="problem-item">SaaS and AI use is visible in fragments, but inventory, ownership, spend, and review state are rarely kept in one working system.</div>
+          <div class="problem-item">Consultant teams spend time rebuilding the same governance structure for every client instead of delivering from one repeatable workflow.</div>
+          <div class="problem-item">Leadership sees presentations, but not a live decision register with confidence, blind spots, and re-review dates.</div>
+          <div class="problem-item">Vendor posture questions are left half-answered, so sanctioned vs unsanctioned use remains operationally muddy.</div>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="workflow">
+        <p class="kicker">Workflow</p>
+        <div class="section-head">
+          <h2 class="section-title">Evidence → inventory → posture → decision → action → report.</h2>
+          <p class="lead">
+            The workflow starts with imports and honest coverage scoring. It turns available evidence into client-facing governance output without pretending every blind spot is solved.
+          </p>
+        </div>
+        <div class="method-grid">
+          <div class="method-step">
+            <b>Step 01</b>
+            <div>
+              <h3>Normalize intake evidence</h3>
+              <p>Import structured evidence from workspace OAuth, IdP/SSO, finance spend, browser/endpoint, CASB/proxy, and vendor/GRC exports.</p>
+            </div>
+          </div>
+          <div class="method-step">
+            <b>Step 02</b>
+            <div>
+              <h3>Build the app inventory</h3>
+              <p>Map SaaS, AI, browser extensions, OAuth apps, and unknown tools by business unit, approval state, spend, data sensitivity, source, and review state.</p>
+            </div>
+          </div>
+          <div class="method-step">
+            <b>Step 03</b>
+            <div>
+              <h3>Record vendor posture and allowed use</h3>
+              <p>Capture first-pass posture on contract state, DPA, deletion rights, residency, AI training policy, security docs, and what is approved, restricted, consolidated, or blocked.</p>
+            </div>
+          </div>
+          <div class="method-step">
+            <b>Step 04</b>
+            <div>
+              <h3>Assign decisions and owner actions</h3>
+              <p>Route work to Security, Privacy, Procurement, Finance, Legal, TPRM, or Audit with conditions, rationale, review date, analyst notes, and clear accountability.</p>
+            </div>
+          </div>
+          <div class="method-step">
+            <b>Step 05</b>
+            <div>
+              <h3>Publish leadership-ready output</h3>
+              <p>Generate a concise operating pack: risk register, owner action plan, evidence coverage, decision register, and executive summary.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="governance">
+        <p class="kicker">Current operating scope</p>
+        <div class="section-head">
+          <h2 class="section-title">What the workflow covers now, and what it requires to be credible.</h2>
+          <p class="lead">
+            AnswerVault is designed to be honest about evidence, confidence, and blind spots. It is useful when consultants already have
+            source access and need a repeatable governance layer on top.
+          </p>
+        </div>
+        <div class="split-grid">
+          <div class="split-col">
+            <h3>What teams get now</h3>
+            <div class="scope-rows">
+              <div class="scope-row">Unified app inventory with SaaS, AI, browser extension, OAuth app, and unknown categories by business unit.</div>
+              <div class="scope-row">Evidence coverage view with missing sources, confidence level, and explicit blind spots.</div>
+              <div class="scope-row">Vendor posture and spend capture with contract status, duplicate category, renewal date, allowed-use controls, and review state.</div>
+              <div class="scope-row">Decision register, review cadence, analyst notes, and owner-level action outputs.</div>
+            </div>
+          </div>
+          <div class="split-col">
+            <h3>What it requires</h3>
+            <div class="scope-rows">
+              <div class="scope-row">Structured client evidence from workspace, identity, finance, browser/endpoint, CASB/proxy, or GRC exports.</div>
+              <div class="scope-row">Consultant judgment to complete vendor posture, validate allowed use, and record rationale.</div>
+              <div class="scope-row">A real owner model for risk and approval decisions, not just an observation that shadow usage exists.</div>
+              <div class="scope-row">A weekly governance cadence: review, assign, follow up, and report.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="proof">
+        <p class="kicker">Proof</p>
+        <div class="section-head">
+          <h2 class="section-title">The client delivery files are already structured as a governance pack.</h2>
+          <p class="lead">
+            Each run produces a set of working artifacts for consultant delivery. The point is not a dashboard. The point is a pack that
+            helps operators and leadership decide what to do next.
+          </p>
+        </div>
+        <div class="deliverables">
+          <div class="deliverables-item">
+            <strong>risk_register.csv</strong>
+            <p>Incident-level view with score, reason, owner, and closure path.</p>
+          </div>
+          <div class="deliverables-item">
+            <strong>app_inventory.csv</strong>
+            <p>Unified app inventory with category, approval state, business unit, sources, spend, routing, and posture fields.</p>
+          </div>
+          <div class="deliverables-item">
+            <strong>decision_register.csv</strong>
+            <p>Decision status, owner, conditions, rationale, review date, and analyst checkpoints.</p>
+          </div>
+          <div class="deliverables-item">
+            <strong>evidence_coverage.json</strong>
+            <p>Available sources, missing sources, confidence level, and blind spots.</p>
+          </div>
+          <div class="deliverables-item">
+            <strong>owner_action_plan.csv</strong>
+            <p>Owner-level task list with due dates, priorities, and SLA expectations.</p>
+          </div>
+          <div class="deliverables-item">
+            <strong>executive_summary.pdf</strong>
+            <p>One-page leadership brief combining risk, evidence confidence, governance posture, and next actions.</p>
+          </div>
+        </div>
+        <div class="proof-lines">
+          <div class="proof-line">The reviewed sample pack includes explicit human judgment, not only model output.</div>
+          <div class="proof-line">Unknowns stay marked unknown. Missing evidence stays visible. The workflow does not pretend certainty it does not have.</div>
+          <div class="proof-line">The product is local-first by default and designed for consultant delivery rather than unmanaged automation.</div>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="commercial">
+        <p class="kicker">Engagement model</p>
+        <div class="section-head">
+          <h2 class="section-title">Pilot first, then recurring governance delivery.</h2>
+          <p class="lead">
+            The right first deployment is narrow: one scoped pilot with evidence exports, one reviewed governance pack, and one weekly
+            operating cadence. From there, the workflow can become a recurring client delivery system.
+          </p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <h3>Pilot</h3>
+            <p>2 to 3 weeks. One client engagement. Baseline evidence normalization and first governance decision pack.</p>
+            <ul>
+              <li>Shadow IT / Shadow AI app inventory by business unit</li>
+              <li>Initial vendor posture, spend, and allowed-use review</li>
+              <li>Decision register and executive summary pack</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <h3>Recurring</h3>
+            <p>Weekly cadence. Refresh evidence, update posture and decisions, track ownership, and publish leadership output.</p>
+            <ul>
+              <li>Weekly review queue and reassessment flags</li>
+              <li>SLA tracking and overdue visibility</li>
+              <li>Repeatable governance reporting for regulated environments</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="pricing">
+        <p class="kicker">Commercial model</p>
+        <div class="section-head">
+          <h2 class="section-title">Pilot wedge now, enterprise modules later.</h2>
+          <p class="lead">
+            Pricing should reflect governance value, not a cheap report utility. Imports are included in pilots; live connectors and workflow integrations become premium modules.
+          </p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <h3>Starter pilot</h3>
+            <p>$1,500–$3,500. Two-week Shadow IT / Shadow AI baseline using available client exports.</p>
+            <ul>
+              <li>Unified inventory and evidence coverage</li>
+              <li>Risk scoring, routing, and first decision register</li>
+              <li>Executive summary and owner action plan</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <h3>Professional governance</h3>
+            <p>Target $24k+ annual minimum. Recurring governance cadence with diligence, exceptions, deltas, and reporting.</p>
+            <ul>
+              <li>Weekly run-to-run change review</li>
+              <li>Document request and risk-acceptance workflow</li>
+              <li>Spend and vendor consolidation context</li>
+            </ul>
+          </article>
+          <article class="plan">
+            <h3>Enterprise modules</h3>
+            <p>Target $75k+ annual minimum. Paid connectors and outbound workflow integrations once the core workflow is validated.</p>
+            <ul>
+              <li>Google Workspace, Microsoft Graph, and Okta connectors</li>
+              <li>CSV export first, then Jira / ServiceNow routing</li>
+              <li>Role model, hosted database, storage, and demo environment</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section id="contact">
+        <p class="kicker">Contact</p>
+        <div class="contact">
+          <p>
+            If you run vCISO, GRC, procurement, or AI governance client delivery and already have access to exported evidence, AnswerVault gives you a
+            practical operating workflow: discovery coverage, inventory, risk routing, posture, spend context, decisions, owner actions, and leadership reporting.
+          </p>
+          <div class="cta-row">
+            <a class="btn-main" href="mailto:answervault.outreach@gmail.com?subject=AnswerVault%20Pilot%20Request">Request pilot intake</a>
+            <a class="btn-ghost" href="mailto:answervault.outreach@gmail.com?subject=AnswerVault%20Sample%20Pack%20Request">Request sample pack</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="signature">AnswerVault · Shadow IT / Shadow AI governance workflow for consultant delivery</div>
+    </div>
+    <script>
+      (() => {
+        const KEY = "av_website_theme";
+        const body = document.body;
+        const button = document.getElementById("themeToggle");
+        const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+
+        function setTheme(theme) {
+          body.setAttribute("data-theme", theme);
+          button.textContent = theme === "light" ? "Dark mode" : "Light mode";
+        }
+
+        let saved = null;
+        try {
+          saved = localStorage.getItem(KEY);
+        } catch {}
+        setTheme(saved || (prefersLight ? "light" : "dark"));
+
+        button.addEventListener("click", () => {
+          const next = body.getAttribute("data-theme") === "light" ? "dark" : "light";
+          setTheme(next);
+          try {
+            localStorage.setItem(KEY, next);
+          } catch {}
+        });
+      })();
+    </script>
+  </body>
+</html>

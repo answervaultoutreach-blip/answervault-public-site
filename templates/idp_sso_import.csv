@@ -1,0 +1,2 @@
+Assessment ID,Event Timestamp (UTC),Employee Email,Business Unit,Application,Application Category,Approval State,Source Type,Source System,Active Users,Data Sensitivity,Contains PII,Contains Source Code,Contains Financial Data,Contains Credentials,Contract Status,Notes
+idp-001,2026-05-01T10:00:00Z,user@company.com,Sales,Example SaaS,SaaS,Unapproved,Okta SSO,Okta,24,Internal,No,No,No,No,Missing,Example Okta/Entra/SSO application usage row
